@@ -1,25 +1,30 @@
-
-from .vikingsClasses import Soldier, Viking, Saxon, War
+from vikingsClasses import Soldier, Viking, Saxon, War
 import random
 
+# Lista de nombres de soldados
+soldier_names = ["albert", "andres", "archie", "dani", "david", "gerard", "german", "graham", "imanol", "laura"]
 
-soldier_names = ["albert","andres","archie","dani", "david","gerard","german","graham","imanol","laura"]
+# Crear instancia de War
+war = War()
 
+# Crear 5 Vikingos
+for _ in range(5):
+    name = random.choice(soldier_names)  # Seleccionar un nombre aleatorio
+    health = 100
+    strength = random.randint(50, 100)  # Fuerza aleatoria entre 50 y 100
+    war.addViking(Viking(name, health, strength))
 
-#Create 5 Vikings
-for i in range(0,5):
-    if i:
-        War.addViking(Viking(soldier_names[random.randint(0,9)],100,random.randint(0,100)))
+# Crear 5 Sajones
+for _ in range(5):
+    health = 100
+    strength = random.randint(50, 100)  # Fuerza aleatoria entre 50 y 100
+    war.addSaxon(Saxon(health, strength))
 
-#Create 5 Saxons
-for i in range(0,5):
-    if i:
-        War.addSaxon(Saxon(100,random.randint(0,100)))
-    
+# Simulación de la batalla
 round = 0
-while War.showStatus() == "Vikings and Saxons are still in the thick of battle.":
-    War.vikingAttack()
-    War.saxonAttack()
-    print(f"round: {round} // Viking army: {len(War.vikingArmy)} warriors",f"and Saxon army: {len(War.saxonArmy)} warriors")
-    print(War.showStatus())
+while war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
+    war.vikingAttack()
+    war.saxonAttack()
+    print(f"Round: {round} // Viking army: {len(war.vikingArmy)} warriors and Saxon army: {len(war.saxonArmy)} warriors")
+    print(war.showStatus())
     round += 1
